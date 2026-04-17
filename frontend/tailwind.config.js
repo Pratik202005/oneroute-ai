@@ -1,0 +1,50 @@
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
+  theme: {
+    extend: {
+      colors: {
+        "surface": "#f8f9fa",
+        "surface-container-lowest": "#ffffff",
+        "surface-container-low": "#f3f4f5",
+        "surface-container": "#edeeef",
+        "surface-container-high": "#e7e8e9",
+        "surface-container-highest": "#e1e3e4",
+        "surface-variant": "#e1e3e4",
+        "surface-dim": "#d9dadb",
+        "primary": "#001142",
+        "primary-container": "#00236f",
+        "on-primary": "#ffffff",
+        "on-primary-container": "#778ede",
+        "secondary": "#006b5f",
+        "secondary-container": "#6df5e1",
+        "on-secondary": "#ffffff",
+        "on-secondary-container": "#006f64",
+        "on-surface": "#191c1d",
+        "on-surface-variant": "#444651",
+        "on-background": "#191c1d",
+        "outline": "#757682",
+        "outline-variant": "#c5c5d3",
+        "error": "#ba1a1a",
+        "error-container": "#ffdad6",
+        "on-error": "#ffffff",
+        "on-error-container": "#93000a",
+        "background": "#f8f9fa",
+      },
+      borderRadius: {
+        DEFAULT: "1rem",
+        lg: "2rem",
+        xl: "3rem",
+      },
+      fontFamily: {
+        headline: ["Manrope", "sans-serif"],
+        body: ["Inter", "sans-serif"],
+        label: ["Inter", "sans-serif"],
+      },
+    },
+  },
+  plugins: [],
+}
