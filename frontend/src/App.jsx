@@ -1,17 +1,21 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import ToastProvider from './components/ToastProvider.jsx'
-
-import Dashboard from './pages/Dashboard.jsx'
-import Markets from './pages/Markets.jsx'
-import Tracking from './pages/Tracking.jsx'
-import Connections from './pages/Connections.jsx'
+import Landing from './pages/Landing'
+import Login from './pages/Login'
+import Dashboard from './pages/Dashboard'
+import Markets from './pages/Markets'
+import Tracking from './pages/Tracking'
+import Connections from './pages/Connections'
 
 function App() {
   return (
     <BrowserRouter>
-      <ToastProvider />
       <Routes>
-        <Route path="/" element={<Dashboard />} />
+        {/* Public */}
+        <Route path="/" element={<Landing />} />
+        <Route path="/login" element={<Login />} />
+
+        {/* App Pages */}
+        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/markets" element={<Markets />} />
         <Route path="/tracking" element={<Tracking />} />
         <Route path="/connections" element={<Connections />} />
