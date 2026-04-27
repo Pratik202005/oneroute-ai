@@ -4,6 +4,7 @@ import toast from 'react-hot-toast'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import PageBackground from '../components/PageBackground'
+import MapView from '../components/MapView'
 
 function Markets() {
   const location = useLocation()
@@ -157,10 +158,10 @@ function Markets() {
           <div className="lg:col-span-2 space-y-4 sm:space-y-6">
             {/* Map */}
             <div className="relative h-[280px] sm:h-[350px] md:h-[400px] w-full rounded-2xl overflow-hidden border border-white/12 bg-white/6 backdrop-blur-2xl shadow-[0px_28px_80px_rgba(0,0,0,0.35)]">
-              <img
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBuzggxas23MKhvKlglgGNI8pFCMUA6V-3VjPdjl7K0mm4gsd99Engl-5Kw8JD7P9CIQJ0_VZI_Wro_a5qOqSuQr5jj5NwDvcqIPz7Wu6rXhtkRVJJvxohy1ZVR5cBN9zPBsPl3guluDeeIqjk7V_2nIek17NcrtWmgpqqJnQoTRDUGjOQN9W0RuL-2eiIlMJuFyXWFKeK6t_TVlAFug0RgDl735DqyyQSFsiaq5uLXXgEeZk26grJrPCQQ1zEOlM5jQ8kPxeEsPq4"
-                alt="Map"
-                className="w-full h-full object-cover opacity-70"
+              <MapView 
+                start={routes.find(r => r.recommended)?.start_location || routes[0]?.start_location}
+                end={routes.find(r => r.recommended)?.end_location || routes[0]?.end_location}
+                polylinePoints={routes.find(r => r.recommended)?.polylinePoints || routes[0]?.polylinePoints}
               />
 
               {/* Floating chip (dark-glass) */}

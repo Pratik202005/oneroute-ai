@@ -1,0 +1,26 @@
+# Environment variables (NEVER share this)
+.env
+.env.local
+.env.production
+
+# Firebase private key (if saved as file)
+serviceAccountKey.json
+firebase-key.json
+*.json.key
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+
+# Build output
+dist/
+build/
