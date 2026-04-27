@@ -66,6 +66,9 @@ export async function getRouteOptions({ origin, destination, quantity }) {
       time: formatDuration(durationSeconds),
       cost: estimateCost(distanceKm, quantity),
       recommended: false,
+      polylinePoints: r.overview_polyline?.points,
+      start_location: leg?.start_location,
+      end_location: leg?.end_location,
     }
   })
 

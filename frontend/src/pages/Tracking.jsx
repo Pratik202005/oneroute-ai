@@ -2,6 +2,7 @@ import { useLocation } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import PageBackground from '../components/PageBackground'
+import MapView from '../components/MapView'
 
 const steps = [
   { id: 1, name: 'Request Submitted', status: 'completed', time: '10:45 AM, Oct 24' },
@@ -14,6 +15,8 @@ const steps = [
 function Tracking() {
   const location = useLocation()
   const formData = location.state?.formData
+  const routes = location.state?.data?.routes || []
+  const bestRoute = routes.find(r => r.recommended) || routes[0]
 
   return (
     <div className="min-h-screen text-white font-body relative">
@@ -258,13 +261,12 @@ function Tracking() {
             </div>
 
             <div className="rounded-2xl h-48 sm:h-64 overflow-hidden relative group border border-white/12 bg-white/6 backdrop-blur-2xl shadow-[0px_28px_80px_rgba(0,0,0,0.35)]">
-              <img
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDLuUNjAJMVOsHyCniluU0lnWVOxDwq37Az3hIMWtD_kdvUu8XcNZmvFWuqHCndlc29QgtS93Pc0XGolXChSLus9iB2A8LpCnvJwX2UKwDRVnFcMfWo8nekw7D2-XtQmI0Zr1PWqWVla3YL_6SNSilgRhGM3JK7fwYaBPwUeco6j4Jtyrii0hk7OJJoOiJhVqaObvjqXPdxL11_YNHbepPIa97wZbT23KUwR4ywh4Givg2_1xqbwEqHzGyxL_4mLMM0fgWNmm1TG"
-                alt="Route Preview"
-                className="w-full h-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0 scale-105 opacity-85"
+              <MapView 
+                start={bestRoute?.start_location}
+                end={bestRoute?.end_location}
+                polylinePoints={bestRoute?.polylinePoints}
               />
-
-              <div className="absolute inset-0 bg-gradient-to-t from-black/65 to-transparent flex flex-col justify-end p-4 sm:p-6">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/65 to-transparent flex flex-col justify-end p-4 sm:p-6 pointer-events-none">
                 <div className="flex items-center justify-between text-white">
                   <div>
                     <p className="text-xs font-label tracking-widest uppercase opacity-70 font-bold">Route Preview</p>
