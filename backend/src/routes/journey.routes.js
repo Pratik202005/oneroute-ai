@@ -6,9 +6,9 @@ router.get(['/journey/health'], (req, res) => {
   res.json({ ok: true, route: 'journey' })
 })
 
-// placeholder endpoint (optional)
-router.get(['/journey/:requestId'], (req, res) => {
-  res.status(501).json({ success: false, error: 'Journey API not implemented yet' })
-})
+import { getJourneyController, updateJourneyController } from '../controllers/journey.controller.js'
+
+router.get(['/journey/:id'], getJourneyController)
+router.put(['/journey/:id'], updateJourneyController)
 
 export default router

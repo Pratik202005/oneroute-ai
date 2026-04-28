@@ -18,6 +18,9 @@ export async function processRequestController(req, res, next) {
       source,
       destination,
       time: time || '',
+      uid: req.body.uid,
+      userName: req.body.userName,
+      userPhoto: req.body.userPhoto,
     })
 
     return res.json({ success: true, data: result })
