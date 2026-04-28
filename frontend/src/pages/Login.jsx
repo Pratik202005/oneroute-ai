@@ -1,7 +1,22 @@
 import { useNavigate } from 'react-router-dom'
+import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
+import { auth } from '../firebase'
+import toast from 'react-hot-toast'
 
 function Login() {
   const navigate = useNavigate()
+
+  const handleGoogleSignIn = async () => {
+    const provider = new GoogleAuthProvider()
+    try {
+      await signInWithPopup(auth, provider)
+      toast.success('Successfully logged in!')
+      navigate('/dashboard')
+    } catch (error) {
+      console.error(error)
+      toast.error('Failed to log in with Google')
+    }
+  }
 
   return (
     <div className="min-h-screen relative overflow-hidden bg-gradient-to-br from-[#001142] via-[#001d3d] to-[#006b5f] flex items-center justify-center px-4">
@@ -33,9 +48,9 @@ function Login() {
           Sign in to access your dashboard
         </p>
 
-        {/* Google button (UI only) */}
+        {/* Google button */}
         <button
-          onClick={() => navigate('/dashboard')}
+          onClick={handleGoogleSignIn}
           className="mt-7 w-full h-12 rounded-xl bg-white text-[#001142] font-black flex items-center justify-center gap-2 hover:scale-[1.01] active:scale-[0.99] transition"
         >
           <span className="material-symbols-outlined">account_circle</span>

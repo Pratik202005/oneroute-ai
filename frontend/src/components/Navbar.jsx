@@ -1,10 +1,24 @@
 import { useEffect, useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { useAuth } from '../context/AuthContext'
+import { auth } from '../firebase'
+import { signOut } from 'firebase/auth'
 
 function Navbar() {
   const location = useLocation()
+  const navigate = useNavigate()
+  const { currentUser } = useAuth()
   const [menuOpen, setMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+
+  const handleLogout = async () => {
+    try {
+      await signOut(auth)
+      navigate('/login')
+    } catch (error) {
+      console.error('Logout error', error)
+    }
+  }
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 10)
@@ -64,9 +78,28 @@ function Navbar() {
               Powered by Google
             </span>
 
-            <div className="w-9 h-9 rounded-full bg-white/10 border border-white/15 backdrop-blur-xl flex items-center justify-center text-white font-black text-xs">
-              JD
-            </div>
+            {currentUser ? (
+              <div className="relative group">
+                <img 
+                  src={currentUser.photoURL || `https://ui-avatars.com/api/?name=${currentUser.displayName || 'U'}`} 
+                  alt="Profile" 
+                  className="w-9 h-9 rounded-full border border-white/15 object-cover cursor-pointer"
+                />
+                <div className="absolute right-0 top-12 hidden group-hover:block bg-white/10 backdrop-blur-xl border border-white/15 rounded-lg overflow-hidden shadow-xl p-2 w-48">
+                  <p className="text-white text-sm font-bold px-3 py-2 truncate">{currentUser.displayName}</p>
+                  <button 
+                    onClick={handleLogout}
+                    className="w-full text-left px-3 py-2 text-sm text-red-300 hover:bg-white/10 rounded-md transition"
+                  >
+                    Logout
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <div className="w-9 h-9 rounded-full bg-white/10 border border-white/15 backdrop-blur-xl flex items-center justify-center text-white font-black text-xs">
+                JD
+              </div>
+            )}
 
             {/* Mobile Menu Button */}
             <button
